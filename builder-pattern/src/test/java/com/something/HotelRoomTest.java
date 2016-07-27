@@ -3,7 +3,6 @@ package com.something;
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import org.junit.Test;
-import com.something.hotelroom.Director;
 import com.something.hotelroom.HotelRoomBuilder;
 import com.something.hotelroom.Room;
 import com.something.hotelroom.RoomBuilder;
@@ -13,10 +12,11 @@ public class HotelRoomTest {
 	@Test
 	public void test() {
 		HotelRoomBuilder builder = new RoomBuilder();
-		Director director = new Director(builder);
-		director.build("SFO", "San Francisco", "US", "United States", "A12B", "Holiday Inn", "C54ABC12", "Presidential Suite", "123456");
-		
-		Room room = builder.getRoom();
+		builder.setCityCode("SFO").setCityName("San Francisco").setCountryCode("US").setCountryName("United States")
+				.setHotelCode("A12B").setHotelName("Holiday Inn").setRoomCode("C54ABC12")
+				.setRoomName("Presidential Suite").setRoomPrice("123456").buildRoom();
+
+		Room room = builder.buildRoom();
 		assertEquals("SFO", room.getCityCode());
 		assertEquals("San Francisco", room.getCityName());
 		assertEquals("US", room.getCountryCode());
